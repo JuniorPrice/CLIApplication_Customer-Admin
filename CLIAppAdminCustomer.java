@@ -60,5 +60,18 @@ public class CLIAppAdminCustomer{
 
     
     // git index numer of a record from arrayList
+    static int gitIndex(ArrayList<ArrayList<String>> tickets,String ticketNumber){
+        int index = -1;
+        int counter = 0;
+        for (ArrayList<String> ticket : tickets){
+            if (ticket.get(0).equals(ticketNumber)){
+                index = counter;
+                return index;
+            }
+            
+            counter++ ;
+        }
+        return index;
+    }
 
 }
