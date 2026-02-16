@@ -45,13 +45,61 @@ public class CLIAppAdminCustomer{
             else {
                 System.out.println("Invalid Input .. Please Try Again >>");
             }
-        }
-        
+        }       
     }
 
     // customer menu handler
     static void customerHandler(){
+        boolean coun = true;
 
+        while (coun){
+            // display customer menu and take customer choice
+            System.out.println("\nCustomer menu >> Choose user type:");
+            System.out.println("(1) Create Ticket\n(2) Back to Main Menu\n");
+            System.out.print("\nEnter your choice: ");
+            choice = inputChoice.nextLine();
+
+            // handle customer choice
+            // add ticket operation
+            if (choice.equals("1")){
+                System.out.print("Enter Ticket Number: ");
+                ticketNumber = inputTicketInfo.nextLine();
+                System.out.print("Enter Ticket Description: ");
+                ticketDescription = inputTicketInfo.nextLine();
+                System.out.print("Enter Ticket Priority( LOW, MEDIUM (default), HIGH): ");
+                ticketPriority = inputTicketInfo.nextLine();
+
+                if (gitIndex(tickets, ticketNumber) == -1){
+                    ArrayList<String> newTicket = new ArrayList<>();
+                    newTicket.add(ticketNumber);
+                    newTicket.add(ticketDescription);
+
+                    if (ticketPriority.equals("LOW") || ticketPriority.equals("MEDIUM") || ticketPriority.equals("HIGH")){
+                        newTicket.add(ticketPriority);
+                    }
+
+                    else {
+                        System.out.println("Not Recognizable Priority !! >> Set to default (MEDIUM) ..");
+                        newTicket.add("MEDIUM");
+                    }
+                    tickets.add(newTicket);
+                    System.out.println("Congrats! Your new ticket has been recorded ...");
+                }
+
+                else {
+                    System.out.println("Error! Ticket Number Already Exists >>>");
+                }
+            }
+
+            // back to main menu
+            else if (choice.equals("2")){
+                System.out.println("Back to Main Menu >>>");
+                coun = false;
+            }
+            else {
+                System.out.println("Invalid Input .. Please Try Again >>");
+            }
+        }
     }
 
 
@@ -109,7 +157,6 @@ public class CLIAppAdminCustomer{
                         tickets.set(gitIndex(tickets, ticketNumber), ticket);
                         System.out.println("Ticket Description Updated ..");
                     }
-
                 }
 
                 // back to the main menu
@@ -122,7 +169,6 @@ public class CLIAppAdminCustomer{
                 }
             }
         }
-
     }
 
     
@@ -140,5 +186,4 @@ public class CLIAppAdminCustomer{
         }
         return index;
     }
-
 }
